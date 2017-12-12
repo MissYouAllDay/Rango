@@ -137,7 +137,7 @@
             [CXUtils createAllTextHUB:dict[@"reason"]];
             return ;
         }
-        
+    // add 登录方式
         NSString *token = [NSString stringWithFormat:@"%@",[dict[@"result"] objectForKey:TOKEN_KEY]];
         NSString *name = [NSString stringWithFormat:@"%@",[dict[@"result"] objectForKey:NAME_KEY]];
         NSString *telName = [NSString stringWithFormat:@"%@",[dict[@"result"] objectForKey:TEL_KEY]];
