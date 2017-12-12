@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="MSLPaySuccessItem">
+            <rect key="frame" x="0.0" y="0.0" width="180" height="140"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="180" height="140"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hfg-Hp-soX">
+                        <rect key="frame" x="0.0" y="0.0" width="180" height="140"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pay_fail.png" translatesAutoresizingMaskIntoConstraints="NO" id="Gny-K4-4cp">
+                                <rect key="frame" x="0.0" y="0.0" width="180" height="140"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJO-8s-Wcd">
+                                <rect key="frame" x="15" y="111" width="150" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="B2Z-x4-sBu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Gny-K4-4cp" firstAttribute="leading" secondItem="Hfg-Hp-soX" secondAttribute="leading" id="G9e-Vv-Hhv"/>
+                            <constraint firstAttribute="bottom" secondItem="Gny-K4-4cp" secondAttribute="bottom" id="GvR-zw-9T9"/>
+                            <constraint firstItem="Gny-K4-4cp" firstAttribute="top" secondItem="Hfg-Hp-soX" secondAttribute="top" id="RQS-V7-abi"/>
+                            <constraint firstAttribute="bottom" secondItem="nJO-8s-Wcd" secondAttribute="bottom" constant="8" id="Vwq-bw-9Uw"/>
+                            <constraint firstAttribute="trailing" secondItem="nJO-8s-Wcd" secondAttribute="trailing" constant="15" id="iWk-Zx-fFn"/>
+                            <constraint firstItem="nJO-8s-Wcd" firstAttribute="leading" secondItem="Hfg-Hp-soX" secondAttribute="leading" constant="15" id="wdV-zU-wOi"/>
+                            <constraint firstAttribute="trailing" secondItem="Gny-K4-4cp" secondAttribute="trailing" id="yxR-Cx-KPL"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="Hfg-Hp-soX" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="cWx-Ps-DGM"/>
+                <constraint firstAttribute="trailing" secondItem="Hfg-Hp-soX" secondAttribute="trailing" id="dCB-wM-3xf"/>
+                <constraint firstItem="Hfg-Hp-soX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="jHN-Kt-nEQ"/>
+                <constraint firstAttribute="bottom" secondItem="Hfg-Hp-soX" secondAttribute="bottom" id="qg2-5h-Hh6"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <size key="customSize" width="180" height="140"/>
+            <connections>
+                <outlet property="name" destination="nJO-8s-Wcd" id="w3v-YN-YXx"/>
+                <outlet property="visaImg" destination="Gny-K4-4cp" id="nRc-yi-OD5"/>
+            </connections>
+            <point key="canvasLocation" x="65" y="64"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="pay_fail.png" width="172" height="134"/>
+    </resources>
+</document>

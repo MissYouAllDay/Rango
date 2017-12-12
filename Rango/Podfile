@@ -1,0 +1,22 @@
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://git.coding.net/leqi/Specs.git'
+
+platform :ios, '9.0'
+use_frameworks!
+inhibit_all_warnings!
+
+target 'GlobeVisa' do
+pod 'JGProgressHUD'
+pod 'SnapKit'
+pod 'Alamofire'
+pod 'JPSVolumeButtonHandler'
+pod 'Safelight'
+pod 'AFNetworking'
+pod 'AMap2DMap'
+pod 'AMapLocation'
+pod 'AMapSearch'
+pod 'Masonry'
+pod 'IQKeyboardManager'
+pod 'WebViewJavascriptBridge'
+pod 'JPush'
+end

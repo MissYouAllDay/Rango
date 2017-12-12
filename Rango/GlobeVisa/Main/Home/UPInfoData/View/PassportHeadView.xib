@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PassportHeadView">
+            <rect key="frame" x="0.0" y="0.0" width="365" height="245"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="护照信息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z5A-Dl-x8H">
+                    <rect key="frame" x="10" y="10" width="345" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="Ohd-u6-Kz9"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo.png" translatesAutoresizingMaskIntoConstraints="NO" id="NEY-4z-U4G">
+                    <rect key="frame" x="57.5" y="55" width="250" height="156"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="NEY-4z-U4G" secondAttribute="height" multiplier="125:78" id="cnq-sF-ALZ"/>
+                        <constraint firstAttribute="height" constant="156" id="ezQ-6v-eBz"/>
+                        <constraint firstAttribute="width" constant="250" id="iU2-AH-Ilu"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="点击修改" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OcD-CL-Wyi">
+                    <rect key="frame" x="133" y="219" width="100" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="Syk-zw-MrY"/>
+                        <constraint firstAttribute="width" constant="100" id="Yc1-Nx-3UC"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Z5A-Dl-x8H" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="3le-Rg-6Gg"/>
+                <constraint firstItem="NEY-4z-U4G" firstAttribute="top" secondItem="Z5A-Dl-x8H" secondAttribute="bottom" constant="15" id="J2P-j2-2vo"/>
+                <constraint firstItem="NEY-4z-U4G" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="QSD-nr-LSx"/>
+                <constraint firstItem="OcD-CL-Wyi" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ZPv-L3-qW3"/>
+                <constraint firstItem="Z5A-Dl-x8H" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="oqb-Jp-9hw"/>
+                <constraint firstItem="OcD-CL-Wyi" firstAttribute="top" secondItem="NEY-4z-U4G" secondAttribute="bottom" constant="8" id="p2G-qP-NRP"/>
+                <constraint firstAttribute="trailing" secondItem="Z5A-Dl-x8H" secondAttribute="trailing" constant="10" id="uJv-Gx-zP0"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="passportImagheView" destination="NEY-4z-U4G" id="6Pu-6q-5LL"/>
+                <outlet property="titleLab" destination="Z5A-Dl-x8H" id="kiM-qH-x6j"/>
+            </connections>
+            <point key="canvasLocation" x="-97.5" y="-589.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="photo.png" width="32" height="25"/>
+    </resources>
+</document>

@@ -1,0 +1,6 @@
+framework module Safelight {
+  umbrella header "Safelight-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,182 @@
+//
+//  LQImgPickerActionSheet.m
+//  QQImagePicker
+//
+//  Created by lawchat on 15/9/23.
+//  Copyright (c) 2015年 mark. All rights reserved.
+//
+
+#import "LQImgPickerActionSheet.h"
+
+@implementation LQImgPickerActionSheet
+{
+    DJCameraViewController *_camera;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        if (!_arrSelected) {
+            self.arrSelected = [NSMutableArray array];
+        }
+    }
+    return self;
+}
+
+#pragma mark - 显示选择照片提示sheet
+- (void)showImgPickerActionSheetInView:(UIViewController*)controller{
+    viewController = controller;
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if (!imaPic) {
+            imaPic = [[UIImagePickerController alloc] init];
+        }
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+//            123456789d
+            imaPic.sourceType = UIImagePickerControllerSourceTypeCamera;
+            imaPic.delegate = self;
+            [viewController presentViewController:imaPic animated:YES completion:nil];
+//            _camera = [[DJCameraViewController alloc] init];
+//            _camera.albimHidden = YES;
+//            _camera.delegateMy = self;
+//            [viewController presentViewController:_camera animated:YES completion:nil];
+        }
+    }]];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"相册中选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self loadImgDataAndShowAllGroup];
+    }]];
+    [controller presentViewController:alertVC animated:YES completion:nil];
+}
+
+#pragma mark - 加载照片数据
+- (void)loadImgDataAndShowAllGroup{
+    if (!_arrSelected) {
+        self.arrSelected = [NSMutableArray array];
+    }
+    [[MImaLibTool shareMImaLibTool] getAllGroupWithArrObj:^(NSArray *arrObj) {
+        if (arrObj && arrObj.count > 0) {
+            self.arrGroup = arrObj;
+            if ( self.arrGroup.count > 0) {
+                MShowAllGroup *svc = [[MShowAllGroup alloc] initWithArrGroup:self.arrGroup arrSelected:self.arrSelected];
+                svc.delegate = self;
+                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:svc];
+                if (_arrSelected) {
+                    svc.arrSeleted = _arrSelected;
+                    svc.mvc.arrSelected = _arrSelected;
+                }
+                svc.maxCout = _maxCount;
+                [viewController presentViewController:nav animated:YES completion:nil];
+            }
+        }
+    }];
+}
+
+#pragma mark - 相机拍照得到的UIImage
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    UIImage *theImage = nil;
+    // 判断，图片是否允许修改
+    if ([picker allowsEditing]){
+        //获取用户编辑之后的图像
+        theImage = [info objectForKey:UIImagePickerControllerEditedImage];
+    } else {
+        // 照片的元数据参数
+        theImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    }
+    if (theImage) {
+        MImaLibTool *imgLibTool = [MImaLibTool shareMImaLibTool];
+
+        [imgLibTool.lib writeImageToSavedPhotosAlbum:[theImage CGImage] orientation:(ALAssetOrientation)[theImage imageOrientation] completionBlock:^(NSURL *assetURL, NSError *error){
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),^{
+                
+                NSLog(@"ALAssetsLibrary:%@\nNSURL:%@",imgLibTool.lib,assetURL);
+
+                [imgLibTool.lib assetForURL:assetURL resultBlock:^(ALAsset *asset){//这里的asset便是我们所需要的图像对应的ALAsset了
+                    
+                    dispatch_async(dispatch_get_main_queue(),^{
+                        if (asset) {
+                            [_arrSelected addObject:asset];
+                            [self finishSelectImg];
+                            [picker dismissViewControllerAnimated:NO completion:nil];
+                        }else {
+                            NSLog(@"你大爷的别点了，这里没有值");
+                            [picker dismissViewControllerAnimated:NO completion:nil];
+                        }
+                    });
+                }failureBlock:^(NSError *error) {
+                }];
+            });
+        }];
+        return;
+        // 保存图片到相册中
+//        MImaLibTool *imgLibTool = [MImaLibTool shareMImaLibTool];
+        [imgLibTool.lib writeImageToSavedPhotosAlbum:[theImage CGImage] orientation:(ALAssetOrientation)[theImage imageOrientation] completionBlock:^(NSURL *assetURL, NSError *error){
+            if (error) {
+            } else {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [imgLibTool.lib assetForURL:assetURL resultBlock:^(ALAsset *asset) {
+                        
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                            if (asset) {
+                                
+                                [_arrSelected addObject:asset];
+                                [self finishSelectImg];
+                                [picker dismissViewControllerAnimated:NO completion:nil];
+                            }
+                        });
+                        
+                    } failureBlock:^(NSError *error) {
+                        
+                    }];
+                });
+                //获取图片路径
+            }
+        }];
+    }
+}
+
+- (void)selectPaiShePhoto:(UIImage *)image withURL:(NSURL *)url {
+   
+    MImaLibTool *imgLibTool = [MImaLibTool shareMImaLibTool];
+
+    //获取图片路径
+    [imgLibTool.lib assetForURL:url resultBlock:^(ALAsset *asset) {
+        if (asset) {
+            
+            [_arrSelected addObject:asset];
+            [self finishSelectImg];
+            [_camera dismissViewControllerAnimated:NO completion:nil];
+        }
+    } failureBlock:^(NSError *error) {
+        
+    }];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
+    [picker dismissViewControllerAnimated:NO completion:nil];
+}
+
+#pragma mark - 完成选择后返回的图片Array(ALAsset*)
+- (void)finishSelectImg{
+    //正方形缩略图
+    NSMutableArray *thumbnailImgArr = [NSMutableArray array];
+    
+    for (ALAsset *set in _arrSelected) {
+        CGImageRef cgImg = [set thumbnail];
+        UIImage* image = [UIImage imageWithCGImage: cgImg];
+        [thumbnailImgArr addObject:image];
+    }
+    
+    if (_selectIndex && _selectArr) {
+        _selectArr[_selectIndex] = _arrSelected[0];
+        _arrSelected = [[NSMutableArray alloc] initWithArray:_selectArr];
+    }
+    [self.delegate  getSelectImgWithALAssetArray:_arrSelected thumbnailImgImageArray:thumbnailImgArr];
+    [_arrSelected removeAllObjects];
+}
+
+@end

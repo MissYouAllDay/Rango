@@ -1,0 +1,93 @@
+//
+//  PrefixHeader.pch
+//  GlobeVisa
+//
+//  Created by MSLiOS on 2016/12/18.
+//  Copyright © 2016年 MSLiOS. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#define MAS_SHORTHAND
+#define MAS_SHORTHAND_GLOBALS
+
+#import "Comment.h"     // DEFINE
+
+//主界面
+#define SCREEN_FRAME      CGRectMake(0, 0, WIDTH, HEIGHT)
+#define BOUND_FRAME      CGRectMake(0, 0, WIDTH, HEIGHT - 64)
+#define HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+#define WIDTH ([[UIScreen mainScreen] bounds].size.width)
+
+//地图 引导图是否展示
+#define LOGINFIRST  @"loginFirst"
+
+// 登录界面 返回按钮 识别标识
+#define OTHERVC     @"other"
+
+// 照片规格
+#define PHOTO_FORMEAT     @"photo_format"
+
+//#define EVUS_ORDER_ID @"_usa_Order_ID"
+
+
+//本地保存的 用户名 和 token  登录方式
+#define TOKEN_KEY   @"token"
+#define NAME_KEY    @"cust_name"
+#define LOGINTYPE_KEY  @"loginType"   // tel 手机号   other 第三方
+#define TEL_KEY    @"cust_phone"        // 手机号
+
+#define TOKEN_VALUE     [[NSUserDefaults standardUserDefaults] objectForKey:TOKEN_KEY]
+#define NAME_VALUE      [[NSUserDefaults standardUserDefaults] objectForKey:NAME_KEY]
+#define LOGINTYPE_VALUE [[NSUserDefaults standardUserDefaults] objectForKey:LOGINTYPE_KEY]
+#define TEL_VALUE [[NSUserDefaults standardUserDefaults] objectForKey:TEL_KEY]
+
+#define AVADEFA     @"我还太小了，不知道答案，请您长按文本联系客服吧！客服电话：4006606033"
+
+// 适配计算   根据宽度等比例缩放
+#define Line(a)  WIDTH/375 * a
+
+// navigationBar  17   小标题15   下一步及等按钮标题  14   文字内容  13
+
+#define FONT_6 ([UIFont systemFontOfSize:6])
+#define FONT_7 ([UIFont systemFontOfSize:7])
+#define FONT_8 ([UIFont systemFontOfSize:8])
+#define FONT_9 ([UIFont systemFontOfSize:9])
+#define FONT_10 ([UIFont systemFontOfSize:10])
+#define FONT_11 ([UIFont systemFontOfSize:11])
+#define FONT_12 ([UIFont systemFontOfSize:12])
+#define FONT_13 ([UIFont systemFontOfSize:13])
+#define FONT_14 ([UIFont systemFontOfSize:14])
+#define FONT_15 ([UIFont systemFontOfSize:15])
+#define FONT_16 ([UIFont systemFontOfSize:16])
+#define FONT_17 ([UIFont systemFontOfSize:17])
+#define FONT_18 ([UIFont systemFontOfSize:18])
+#define FONT_19 ([UIFont systemFontOfSize:19])
+#define FONT_20 ([UIFont systemFontOfSize:20])
+#define FONT_21 ([UIFont systemFontOfSize:21])
+#define FONT_22 ([UIFont systemFontOfSize:22])
+#define FONT_23 ([UIFont systemFontOfSize:23])
+
+
+#define FONT_SIZE_9  (WIDTH > 375 ? FONT_11 : FONT_9)
+#define FONT_SIZE_10 (WIDTH > 375 ? FONT_12 : FONT_10)
+#define FONT_SIZE_11 (WIDTH > 375 ? FONT_13 : FONT_11)
+#define FONT_SIZE_12 (WIDTH > 375 ? FONT_14 : FONT_12)
+#define FONT_SIZE_13 (WIDTH > 375 ? FONT_15 : FONT_13)
+#define FONT_SIZE_14 (WIDTH > 375 ? FONT_16 : FONT_14)
+#define FONT_SIZE_15 (WIDTH > 375 ? FONT_17 : FONT_15)
+#define FONT_SIZE_16 (WIDTH > 375 ? FONT_18 : FONT_16)
+#define FONT_SIZE_17 (WIDTH > 375 ? FONT_19 : FONT_17)
+#define FONT_SIZE_19 (WIDTH > 375 ? FONT_20 : FONT_19)
+
+typedef enum {
+    typeStart,          //没有资料
+    typePhoto,          //只有照片
+    typeAccountBook,    //只有户口本
+    typeEnd             //材料齐全
+    
+}MaterType;
+
+
+#endif /* PrefixHeader_pch */
