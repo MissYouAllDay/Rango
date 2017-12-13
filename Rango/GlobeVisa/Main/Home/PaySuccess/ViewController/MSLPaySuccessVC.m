@@ -71,7 +71,6 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     MSLPaySuccessItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"paySuccessItem" forIndexPath:indexPath];
-
     MSLCountryModel *model = _dataArr[indexPath.row];
     cell.name.text = model.rm_url;
     [cell.visaImg sd_setImageWithURL:[NSURL URLWithString:model.rm_img_url] placeholderImage:[UIImage imageNamed:@"pay_fail"]];
